@@ -39,16 +39,16 @@ c-video/
 │   │   └── index.ts                    # TypeScript definitions
 │   └── styles.css                      # Global styles
 │
-├── docs/                               # Documentation (THIS)
+├── docs/                               # Documentation
 │   ├── project-overview-pdr.md         # Vision, scope, requirements
 │   ├── system-architecture.md          # Technical design
 │   ├── code-standards.md               # (This file)
 │   ├── codebase-summary.md             # File-by-file overview
-│   └── ...
+│   └── README.md                       # Documentation index
 │
 ├── package.json                        # Frontend dependencies
 ├── tsconfig.json                       # TypeScript config
-└── CLAUDE.md                           # Claude AI instructions
+└── README.md                           # Project overview
 ```
 
 ## Naming Conventions

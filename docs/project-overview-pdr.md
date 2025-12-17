@@ -2,21 +2,53 @@
 
 ## Project Vision
 
-C-Video is a multi-stream video broadcasting desktop application that enables users to manage, scan, and stream media content via RTSP protocol with customizable encoding profiles. The application provides a unified interface for library management, stream configuration, and real-time process supervision.
+C-Video is a multi-stream video broadcasting desktop application for LAN and WAN streaming via RTSP/SRT protocols. It enables users to manage, scan, merge, and stream up to 50+ concurrent media sources with intelligent codec handling, hardware-accelerated encoding (NVIDIA NVENC), resource-aware scheduling, and real-time monitoring. The application provides a unified interface for library management, stream configuration, merge operations, and real-time process supervision.
 
 ## Project Scope
 
-### Primary Features (Phase 1 - COMPLETED)
-- Media library scanning with metadata extraction
-- Stream profile creation and management
+### Phase 1: Core Streaming Foundation (COMPLETED)
+- Media library scanning with metadata extraction via ffprobe
+- Stream profile creation and management with RTSP/SRT protocols
 - FFmpeg-based streaming with process supervision
 - Desktop UI for library and control center management
+- Real-time progress tracking (frame, FPS, bitrate, time)
+- Error handling and recovery
+
+### Phase 2: Multi-Stream Scheduler (COMPLETED)
+- Queue-based task scheduling with priority support
+- CPU utilization limits and monitoring
+- Concurrent stream limits with graceful degradation
+- Bitrate allocation and throttling
+- Stream telemetry and metrics collection
+
+### Phase 3: NVIDIA NVENC + WAN Hardening (COMPLETED)
+- NVIDIA GPU detection and capability analysis
+- Hardware-accelerated H.264/H.265 encoding
+- NVENC session management and resource limits
+- SRT protocol with AES encryption support
+- WAN optimization profiles for low-bandwidth scenarios
+
+### Phase 4: Smart File Merge & Normalize (COMPLETED)
+- Intelligent file concatenation with compatibility analysis
+- Concat-copy for compatible codecs (no re-encoding)
+- Transcode normalization for mixed codec files
+- LRU cache for normalized intermediate files
+- Merge preview with quality/time tradeoff analysis
+
+### Phase 5: Product Polish (COMPLETED)
+- Onboarding wizard for first-run setup
+- Keyboard shortcuts for power users
+- Diagnostics export (system info, logs, state)
+- Settings page with app configuration
+- Merge UI with drag-and-drop file selection
 
 ### Long-term Goals (Future Phases)
-- Multi-protocol support (RTMP, HLS, HTTP)
-- Advanced scheduling and automation
-- Analytics and monitoring dashboard
-- Collaborative features and remote control
+- RTMP and HLS protocol support
+- Advanced scheduling and automation (cron, webhooks)
+- Analytics and monitoring dashboard with historical metrics
+- Distributed encoding (multiple instances)
+- Central control plane for multi-encoder coordination
+- WebUI for remote management
 
 ## Product Development Requirements (PDR)
 
@@ -122,9 +154,98 @@ C-Video is a multi-stream video broadcasting desktop application that enables us
 | Memory leak in progress parser | Medium | Medium | Regular profile testing, limit buffer sizes |
 | Cross-platform path issues | Medium | Medium | Use PathBuf, test on macOS/Windows/Linux |
 
+### Phase 2: Multi-Stream Scheduler (COMPLETED Dec 17, 2025)
+
+#### Functional Requirements
+
+**FR-5: Scheduler & Resource Management**
+- Queue-based task scheduling with FIFO and priority support
+- CPU utilization tracking and limits (configurable %)
+- Concurrent stream limits (up to 50)
+- Bitrate allocation and throttling
+- Graceful degradation under resource constraints
+
+**FR-6: Telemetry & Monitoring**
+- Real-time CPU usage monitoring (per-core and aggregate)
+- GPU memory tracking
+- Stream metrics collection (bitrate, frames, duration)
+- Capacity dashboard with headroom indicators
+- Historical metrics storage (future)
+
+---
+
+### Phase 3: NVIDIA NVENC + WAN Hardening (COMPLETED Dec 17, 2025)
+
+#### Functional Requirements
+
+**FR-7: GPU Encoding Support**
+- Automatic NVIDIA GPU detection
+- NVENC capability analysis (H.264, H.265 support)
+- GPU session management with resource limits
+- Fallback to CPU encoding if unavailable
+- Concurrent GPU session limits
+
+**FR-8: WAN Optimization**
+- SRT protocol support with encryption
+- AES-128 encryption for secure transport
+- WAN optimization profiles (latency vs quality)
+- Reduced GOP size for low-latency streaming
+- Adaptive bitrate hints
+
+---
+
+### Phase 4: Smart File Merge & Normalize (COMPLETED Dec 17, 2025)
+
+#### Functional Requirements
+
+**FR-9: File Merging**
+- Concatenate multiple media files
+- Compatibility analysis before merge
+- Merge preview with time/quality estimates
+- Cancel in-progress merges
+
+**FR-10: Normalization**
+- Transcode files to common codec
+- LRU cache for normalized intermediates
+- Automatic codec profile alignment
+- Support mixed container formats
+
+---
+
+### Phase 5: Product Polish (COMPLETED Dec 17, 2025)
+
+#### Functional Requirements
+
+**FR-11: User Experience**
+- Onboarding wizard for first-run setup
+- FFmpeg/ffprobe validation during setup
+- MediaMTX initialization
+- Quick tutorial walkthrough
+
+**FR-12: Accessibility & Power Users**
+- Customizable keyboard shortcuts
+- Stream control hotkeys
+- Search and filter (Ctrl+F)
+- Help overlay (?)
+
+**FR-13: Troubleshooting**
+- 1-click diagnostics export (ZIP)
+- System information snapshot
+- Application logs export
+- Stream history and errors
+- FFmpeg version and capabilities report
+
 ### Version History
 
-- **v0.1.0** (Dec 17, 2025): Phase 1 Core Streaming Foundation - Initial Release
+- **v0.1.0** (Dec 17, 2025): Phases 0-5 Complete - Multi-Stream Broadcasting Foundation
+  - Core streaming with 50+ concurrent streams
+  - Hardware-accelerated NVIDIA NVENC encoding
+  - File merge and normalize with smart codec handling
+  - Resource-aware scheduling with CPU/NVENC/bitrate limits
+  - Real-time telemetry and monitoring
+  - RTSP/SRT dual-protocol streaming with encryption
+  - First-run onboarding and power-user shortcuts
+  - Diagnostics export for troubleshooting
 
 ---
 
