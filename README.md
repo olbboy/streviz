@@ -1,4 +1,4 @@
-# C-Video
+# Streviz
 
 Multi-stream video broadcasting desktop application for LAN and WAN streaming via RTSP/SRT protocols with hardware-accelerated encoding support.
 
@@ -311,36 +311,18 @@ pnpm tauri build -- --target x86_64-unknown-linux-gnu
 
 ## Status
 
-**Phase**: 1 (Core Streaming Foundation) - COMPLETE
 **Version**: 0.1.0
 **Build**: December 17, 2025
-
-**Completed Phases**:
-- ✓ Phase 0: Technical Spike (sidecar bundling)
-- ✓ Phase 1: Core Streaming (scanner, profiles, basic UI)
-- ✓ Phase 2: Multi-Stream Scheduler (queue, limits, telemetry)
-- ✓ Phase 3: NVENC + WAN Hardening (GPU detection, SRT encryption)
-- ✓ Phase 4: Smart Merge + Normalize (concat-copy, normalize cache)
-- ✓ Phase 5: Product Polish (diagnostics, onboarding, shortcuts)
-
 **Test Results**: 50 Rust unit tests passing, TypeScript clean
 
 ## Roadmap
 
-### Phase 2 (Future)
 - RTMP protocol support
 - HLS streaming with segment generation
 - Remote stream management
-
-### Phase 3 (Future)
 - Prometheus metrics export
 - Stream analytics dashboard
-- Bandwidth utilization graphs
-
-### Phase 4 (Future)
 - Distributed encoding (multiple instances)
-- Central control plane
-- Load balancing
 
 ## Documentation
 
@@ -367,4 +349,4 @@ For issues and feature requests, use the project issue tracker.
 
 ---
 
-**Last Updated**: December 17, 2025 | **Status**: Phase 1 Complete
+**Last Updated**: December 17, 2025
