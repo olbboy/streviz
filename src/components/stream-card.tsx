@@ -29,6 +29,9 @@ function getStreamUrl(stream: Stream): string {
   if (stream.protocol === "rtsp") {
     return `rtsp://localhost:8554/${stream.name}`;
   }
+  if (stream.protocol === "rtmp") {
+    return `rtmp://localhost:1935/live/${stream.name}`;
+  }
   return `srt://localhost:8890?streamid=read:${stream.name}`;
 }
 

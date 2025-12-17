@@ -213,7 +213,7 @@ All documents are interconnected:
 
 ### Stream Profiles
 ✓ Profile creation and management
-✓ Multiple protocols (RTSP primary, RTMP/HLS future)
+✓ Multiple protocols (RTSP, SRT, RTMP supported, HLS future)
 ✓ Encoding modes (copy/transcode)
 ✓ Bitrate and resolution configuration
 ✓ GOP size and WAN optimization settings

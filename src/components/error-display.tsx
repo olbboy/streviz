@@ -43,7 +43,7 @@ const ERROR_MAP: Record<string, Omit<ErrorInfo, "code">> = {
   MEDIAMTX_START_FAILED: {
     message: "Failed to start media server",
     suggestion:
-      "Another process may be using port 8554 or 8890. Close any conflicting applications.",
+      "Another process may be using port 8554, 8890, or 1935. Close any conflicting applications.",
   },
   FFMPEG_CRASH: {
     message: "Video encoder crashed",

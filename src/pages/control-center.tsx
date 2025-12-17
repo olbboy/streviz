@@ -283,6 +283,10 @@ export function ControlCenterPage({ onNavigate }: ControlCenterPageProps) {
                 <strong>SRT Base:</strong>
                 <code>srt://localhost:8890?streamid=read:&lt;stream-name&gt;</code>
               </div>
+              <div className="endpoint">
+                <strong>RTMP Base:</strong>
+                <code>rtmp://localhost:1935/live/&lt;stream-name&gt;</code>
+              </div>
             </div>
           </div>
         </div>

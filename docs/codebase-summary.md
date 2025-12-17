@@ -215,7 +215,7 @@ pub async fn update_stream_status(
 
 **Key Responsibilities**:
 - Build FFmpeg arguments from stream profiles
-- Support multiple protocols (RTSP, RTMP, HLS)
+- Support multiple protocols (RTSP, SRT, RTMP, HLS)
 - Handle encoding modes (copy, transcode)
 - Generate proper output URLs
 

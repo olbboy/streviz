@@ -20,7 +20,7 @@ const STEPS: OnboardingStep[] = [
     id: "welcome",
     title: "Welcome to C-Video",
     content:
-      "Stream your video files to any device on your network using RTSP or SRT protocols.",
+      "Stream your video files to any device on your network using RTSP, SRT, or RTMP protocols.",
   },
   {
     id: "folders",
@@ -303,7 +303,7 @@ export function Onboarding({ profiles, onComplete }: OnboardingProps) {
               <p className="step-note">
                 {networkMode === "wan"
                   ? "WAN mode enables SRT encryption. You may need to configure port forwarding."
-                  : "LAN mode uses RTSP for simplicity and lowest latency."}
+                  : "LAN mode uses RTSP for simplicity and lowest latency. RTMP is also available for streaming to platforms like YouTube or Twitch."}
               </p>
             </div>
           )}

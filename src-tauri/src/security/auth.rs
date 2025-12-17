@@ -80,6 +80,23 @@ pub fn build_srt_url(
     url
 }
 
+/// Build RTMP URL with optional authentication
+pub fn build_rtmp_url(
+    host: &str,
+    port: u16,
+    app: &str, // Usually "live" for RTMP
+    stream_name: &str,
+    auth: Option<&StreamAuth>,
+) -> String {
+    match auth {
+        Some(a) => format!(
+            "rtmp://{}:{}@{}:{}/{}/{}",
+            a.username, a.password, host, port, app, stream_name
+        ),
+        None => format!("rtmp://{}:{}/{}/{}", host, port, app, stream_name),
+    }
+}
+
 /// Build publisher URL (for FFmpeg to push to MediaMTX)
 pub fn build_publish_url(
     protocol: &str,
@@ -91,6 +108,7 @@ pub fn build_publish_url(
 
     match protocol {
         "srt" => build_srt_url(host, 8890, stream_name, "publish", auth),
+        "rtmp" => build_rtmp_url(host, 1935, "live", stream_name, auth),
         _ => build_rtsp_url(host, 8554, stream_name, auth),
     }
 }
@@ -104,6 +122,7 @@ pub fn build_reader_url(
 ) -> String {
     match protocol {
         "srt" => build_srt_url(host, 8890, stream_name, "read", auth),
+        "rtmp" => build_rtmp_url(host, 1935, "live", stream_name, auth),
         _ => build_rtsp_url(host, 8554, stream_name, auth),
     }
 }
@@ -159,5 +178,8 @@ mod tests {
 
         let url_wan = build_publish_url("srt", "stream1", None, true);
         assert!(url_wan.contains("0.0.0.0"));
+
+        let url_rtmp = build_publish_url("rtmp", "stream1", None, false);
+        assert!(url_rtmp.contains("rtmp://localhost:1935/live/stream1"));
     }
 }

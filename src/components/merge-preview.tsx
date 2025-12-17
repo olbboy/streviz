@@ -186,6 +186,8 @@ export function MergePreview({
             <code className="url">
               {profile?.protocol === "srt"
                 ? `srt://localhost:8890?streamid=read:${streamName}`
+                : profile?.protocol === "rtmp"
+                ? `rtmp://localhost:1935/live/${streamName}`
                 : `rtsp://localhost:8554/${streamName}`}
             </code>
           </div>
@@ -194,6 +196,8 @@ export function MergePreview({
             <code className="command">
               {profile?.protocol === "srt"
                 ? `ffplay "srt://localhost:8890?streamid=read:${streamName}"`
+                : profile?.protocol === "rtmp"
+                ? `ffplay "rtmp://localhost:1935/live/${streamName}"`
                 : `ffplay "rtsp://localhost:8554/${streamName}"`}
             </code>
           </div>

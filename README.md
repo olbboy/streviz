@@ -1,6 +1,6 @@
 # Streviz
 
-Multi-stream video broadcasting desktop application for LAN and WAN streaming via RTSP/SRT protocols with hardware-accelerated encoding support.
+Multi-stream video broadcasting desktop application for LAN and WAN streaming via RTSP/SRT/RTMP protocols with hardware-accelerated encoding support.
 
 ## Quick Start
 
@@ -42,12 +42,13 @@ Intelligent encoding strategy with copy-first approach and automatic fallback.
 - Automatic codec detection and compatibility analysis
 - 3-tier compatibility detection (supported/warning/unsupported)
 
-### 3. RTSP & SRT Protocols
-Dual-protocol streaming for different network environments.
+### 3. RTSP, SRT & RTMP Protocols
+Multi-protocol streaming for different network environments.
 - **RTSP**: Real-time Streaming Protocol for local LAN (via MediaMTX)
 - **SRT**: Secure Reliable Transport for WAN with encryption support
+- **RTMP**: Real-Time Messaging Protocol for streaming to platforms like YouTube, Twitch, etc.
 - Protocol-specific optimizations
-- Future support: RTMP, HLS
+- Future support: HLS
 
 ### 4. NVIDIA NVENC Support
 Hardware-accelerated video encoding on NVIDIA GPUs.
@@ -317,7 +318,6 @@ pnpm tauri build -- --target x86_64-unknown-linux-gnu
 
 ## Roadmap
 
-- RTMP protocol support
 - HLS streaming with segment generation
 - Remote stream management
 - Prometheus metrics export

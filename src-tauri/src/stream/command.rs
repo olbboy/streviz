@@ -111,6 +111,9 @@ pub fn build_ffmpeg_args_with_auth(
         "srt" => {
             args.extend(["-f".into(), "mpegts".into()]);
         }
+        "rtmp" => {
+            args.extend(["-f".into(), "flv".into()]);
+        }
         _ => {
             args.extend(["-f".into(), "rtsp".into(), "-rtsp_transport".into(), "tcp".into()]);
         }
@@ -125,6 +128,7 @@ pub fn get_stream_url(protocol: &str, stream_name: &str) -> String {
     match protocol {
         "rtsp" => format!("rtsp://localhost:8554/{}", stream_name),
         "srt" => format!("srt://localhost:8890?streamid=read:{}", stream_name),
+        "rtmp" => format!("rtmp://localhost:1935/live/{}", stream_name),
         _ => format!("rtsp://localhost:8554/{}", stream_name),
     }
 }
@@ -176,5 +180,31 @@ mod tests {
         assert!(args.contains(&"-c:v".into()));
         assert!(args.contains(&"copy".into()));
         assert!(args.contains(&"rtsp://localhost:8554/test-stream".into()));
+    }
+
+    #[test]
+    fn test_rtmp_args() {
+        let media = test_media();
+        let mut profile = test_profile_copy();
+        profile.protocol = "rtmp".into();
+        let args = build_ffmpeg_args(&media, &profile, "test-stream");
+
+        assert!(args.contains(&"-c:v".into()));
+        assert!(args.contains(&"copy".into()));
+        assert!(args.contains(&"-f".into()));
+        assert!(args.contains(&"flv".into()));
+        assert!(args.contains(&"rtmp://localhost:1935/live/test-stream".into()));
+    }
+
+    #[test]
+    fn test_get_stream_url() {
+        let rtsp_url = get_stream_url("rtsp", "test");
+        assert_eq!(rtsp_url, "rtsp://localhost:8554/test");
+
+        let srt_url = get_stream_url("srt", "test");
+        assert_eq!(srt_url, "srt://localhost:8890?streamid=read:test");
+
+        let rtmp_url = get_stream_url("rtmp", "test");
+        assert_eq!(rtmp_url, "rtmp://localhost:1935/live/test");
     }
 }

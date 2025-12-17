@@ -27,6 +27,11 @@ export function UrlCopier({
         url += `&passphrase=${auth.srt_passphrase}&pbkeylen=32`;
       }
       return url;
+    } else if (stream.protocol === "rtmp") {
+      if (auth) {
+        return `rtmp://${auth.username}:${auth.password}@${host}:1935/live/${stream.name}`;
+      }
+      return `rtmp://${host}:1935/live/${stream.name}`;
     } else {
       if (auth) {
         return `rtsp://${auth.username}:${auth.password}@${host}:8554/${stream.name}`;

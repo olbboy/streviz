@@ -32,6 +32,11 @@ rtspAddress: :8554
 protocols: [tcp, udp]
 rtspTransport: tcp
 
+# RTMP Server
+rtmp: yes
+rtmpAddress: :1935
+rtmpEncryption: no
+
 # SRT Server
 srt: yes
 srtAddress: :8890
@@ -220,6 +225,11 @@ rtspAddress: :8554
 protocols: [tcp, udp]
 rtspTransport: tcp
 
+# RTMP Server
+rtmp: yes
+rtmpAddress: :1935
+rtmpEncryption: no
+
 # SRT Server
 srt: yes
 srtAddress: :8890
@@ -279,6 +289,7 @@ mod tests {
     fn test_generate_config_no_streams() {
         let config = generate_mediamtx_config(&[], false);
         assert!(config.contains("rtsp: yes"));
+        assert!(config.contains("rtmp: yes"));
         assert!(config.contains("srt: yes"));
         assert!(config.contains("all:"));
     }
@@ -305,5 +316,24 @@ mod tests {
     fn test_generate_config_wan_mode() {
         let config = generate_mediamtx_config(&[], true);
         assert!(config.contains("srtLatency: 2000ms"));
+    }
+
+    #[test]
+    fn test_rtmp_config_enabled() {
+        let config = generate_mediamtx_config(&[], false);
+
+        // Verify RTMP server is enabled
+        assert!(config.contains("rtmp: yes"));
+
+        // Verify RTMP port is set to standard 1935
+        assert!(config.contains("rtmpAddress: :1935"));
+
+        // Verify RTMP encryption is disabled for compatibility
+        assert!(config.contains("rtmpEncryption: no"));
+
+        // Verify RTMP configuration comes before SRT
+        let rmp_pos = config.find("rtmp:").unwrap();
+        let srt_pos = config.find("srt:").unwrap();
+        assert!(rmp_pos < srt_pos);
     }
 }

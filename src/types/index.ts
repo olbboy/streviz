@@ -23,7 +23,7 @@ export interface Stream {
   media_file_id: string | null;
   name: string;
   profile_id: string | null;
-  protocol: "rtsp" | "srt";
+  protocol: "rtsp" | "srt" | "rtmp";
   mode: "copy" | "cpu" | "nvenc";
   status: "stopped" | "starting" | "queued" | "running" | "error";
   pid: number | null;
@@ -34,7 +34,7 @@ export interface Stream {
 export interface Profile {
   id: string;
   name: string;
-  protocol: "rtsp" | "srt";
+  protocol: "rtsp" | "srt" | "rtmp";
   mode: "copy" | "cpu" | "nvenc";
   video_bitrate: number | null;
   audio_bitrate: number | null;

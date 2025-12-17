@@ -2,13 +2,13 @@
 
 ## Project Vision
 
-C-Video is a multi-stream video broadcasting desktop application for LAN and WAN streaming via RTSP/SRT protocols. It enables users to manage, scan, merge, and stream up to 50+ concurrent media sources with intelligent codec handling, hardware-accelerated encoding (NVIDIA NVENC), resource-aware scheduling, and real-time monitoring. The application provides a unified interface for library management, stream configuration, merge operations, and real-time process supervision.
+C-Video is a multi-stream video broadcasting desktop application for LAN and WAN streaming via RTSP/SRT/RTMP protocols. It enables users to manage, scan, merge, and stream up to 50+ concurrent media sources with intelligent codec handling, hardware-accelerated encoding (NVIDIA NVENC), resource-aware scheduling, and real-time monitoring. The application provides a unified interface for library management, stream configuration, merge operations, and real-time process supervision.
 
 ## Project Scope
 
 ### Phase 1: Core Streaming Foundation (COMPLETED)
 - Media library scanning with metadata extraction via ffprobe
-- Stream profile creation and management with RTSP/SRT protocols
+- Stream profile creation and management with RTSP/SRT/RTMP protocols
 - FFmpeg-based streaming with process supervision
 - Desktop UI for library and control center management
 - Real-time progress tracking (frame, FPS, bitrate, time)
@@ -65,7 +65,7 @@ C-Video is a multi-stream video broadcasting desktop application for LAN and WAN
 
 **FR-2: Stream Profiles**
 - Create and manage encoding profiles
-- Support multiple protocols (RTSP, future: RTMP, HLS)
+- Support multiple protocols (RTSP, SRT, RTMP, future: HLS)
 - Support encoding modes: copy (passthrough), transcode
 - Configure bitrate, resolution, GOP size
 - Optional WAN optimization settings
@@ -243,7 +243,7 @@ C-Video is a multi-stream video broadcasting desktop application for LAN and WAN
   - File merge and normalize with smart codec handling
   - Resource-aware scheduling with CPU/NVENC/bitrate limits
   - Real-time telemetry and monitoring
-  - RTSP/SRT dual-protocol streaming with encryption
+  - RTSP/SRT/RTMP multi-protocol streaming with encryption
   - First-run onboarding and power-user shortcuts
   - Diagnostics export for troubleshooting
 
