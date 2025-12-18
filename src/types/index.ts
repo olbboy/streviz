@@ -14,9 +14,18 @@ export interface MediaFile {
   height: number | null;
   duration_secs: number | null;
   bitrate: number | null;
+  size_bytes: number | null;
   compatibility: "copy" | "transcode" | "unsupported";
   scanned_at: string;
+  created_at?: string;
+  thumbnail_url?: string;
 }
+
+// View modes for media library
+export type ViewMode = "grid" | "list" | "tree";
+
+// Filter types for media files
+export type FilterType = "all" | "video" | "audio" | "image";
 
 export interface Stream {
   id: string;

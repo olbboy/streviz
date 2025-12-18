@@ -114,6 +114,20 @@ export function useStreams() {
     []
   );
 
+  const createBatch = useCallback(
+    async (mediaFileIds: string[], name: string, profileId: string) => {
+      const result = await invoke<BatchResult>("create_batch_streams", {
+        mediaFileIds,
+        name,
+        profileId,
+      });
+      // Refresh streams after batch creation
+      await loadAll();
+      return result;
+    },
+    [loadAll]
+  );
+
   const start = useCallback(async (id: string) => {
     const url = await invoke<string>("start_stream", { id });
     setStreams((prev) =>
@@ -134,7 +148,7 @@ export function useStreams() {
     setStreams((prev) => prev.filter((s) => s.id !== id));
   }, []);
 
-  return { streams, loading, loadAll, create, start, stop, remove };
+  return { streams, loading, loadAll, create, createBatch, start, stop, remove };
 }
 
 // Profile hooks
