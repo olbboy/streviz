@@ -1,7 +1,10 @@
+// DEPRECATED: GlassNavigation component - replaced by ResponsiveNavigation
+// This file is kept for backward compatibility and showcase purposes only
+// Use components/navigation/responsive-navigation.tsx for new development
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { GlassButton } from "./glass-button"
-import { GlassIconButton } from "./glass-button"
+import { Button } from "./button"
 
 interface GlassNavigationProps extends React.HTMLAttributes<HTMLElement> {
   variant?: "navbar" | "sidebar" | "bottom-nav" | "breadcrumbs"
@@ -98,11 +101,10 @@ export const GlassNavItem = React.forwardRef<HTMLButtonElement, NavItemProps & {
 
   if (variant === "icon-only") {
     return (
-      <GlassIconButton
+      <Button
         ref={ref}
-        icon={icon}
-        tooltip={label}
-        variant={isActive ? "primary" : "surface"}
+        variant={isActive ? "default" : "surface"}
+        size="icon"
         className={cn(
           "h-12 w-12",
           isActive && "ring-2 ring-broadcast-blue/50",
@@ -110,8 +112,11 @@ export const GlassNavItem = React.forwardRef<HTMLButtonElement, NavItemProps & {
         )}
         onClick={onClick}
         disabled={isDisabled}
+        title={label}
         {...props}
-      />
+      >
+        {icon}
+      </Button>
     )
   }
 
@@ -143,10 +148,10 @@ export const GlassNavItem = React.forwardRef<HTMLButtonElement, NavItemProps & {
   }
 
   return (
-    <GlassButton
+    <Button
       ref={ref}
-      variant={isActive ? "primary" : "ghost"}
-      size="md"
+      variant={isActive ? "default" : "ghost"}
+      size="default"
       className={cn(
         "justify-start h-12 px-4 rounded-xl",
         isActive && "shadow-lg shadow-broadcast-blue/25",
@@ -177,7 +182,7 @@ export const GlassNavItem = React.forwardRef<HTMLButtonElement, NavItemProps & {
       {isActive && (
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-broadcast-blue rounded-r-full" />
       )}
-    </GlassButton>
+    </Button>
   )
 })
 GlassNavItem.displayName = "GlassNavItem"

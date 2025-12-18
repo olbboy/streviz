@@ -88,11 +88,11 @@ export const StreamStatus = React.forwardRef<HTMLDivElement, StreamStatusProps>(
     const getStatusAnimation = (statusType: string) => {
       switch (statusType) {
         case "live":
-          return "animate-pulse-subtle"
+          return "status-online"
         case "starting":
-          return "animate-pulse"
+          return "status-warning"
         case "error":
-          return "animate-pulse"
+          return "status-warning"
         default:
           return ""
       }

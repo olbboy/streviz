@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronRight, ChevronDown, Film, Music, Image, File as FileIcon, Folder, FolderOpen, Check } from "lucide-react";
-import { GlassCard } from "../ui/glass-card";
+import { Card } from "../ui/card";
 import type { MediaFile, MediaGroup } from "../../types";
 
 interface EnhancedFileTreeProps {
@@ -220,20 +220,20 @@ export function EnhancedFileTree({
 
   if (files.length === 0) {
     return (
-      <GlassCard className="empty-tree" variant="interactive">
+      <Card className="empty-tree surface">
         <div className="empty-tree-content">
           <Folder size={48} className="empty-icon" />
           <h3>No media files</h3>
           <p>Scan a folder to add media files to your library.</p>
         </div>
-      </GlassCard>
+      </Card>
     );
   }
 
   return (
     <div className="enhanced-file-tree">
       {groups.map((group) => (
-        <GlassCard key={group.folder} className="folder-card" variant="subtle">
+        <Card key={group.folder} className="folder-card surface">
           <FolderNode
             group={group}
             isExpanded={expandedFolders.has(group.folder)}
@@ -242,7 +242,7 @@ export function EnhancedFileTree({
             onSelect={onSelect}
             onMultiSelect={onMultiSelect}
           />
-        </GlassCard>
+        </Card>
       ))}
     </div>
   );

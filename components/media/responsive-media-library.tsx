@@ -12,9 +12,9 @@ import {
   FunnelIcon,
   ArrowPathIcon
 } from '@heroicons/react/24/outline';
-import { GlassButton } from '../ui/glass-button';
-import { GlassInput } from '../ui/input';
-import { GlassCard } from '../ui/glass-card';
+import { Button } from '../../src/components/ui/button';
+import { Input } from '../../src/components/ui/input';
+import { Card } from '../../src/components/ui/card';
 import { TechnicalMetric } from '../ui/typography';
 import { CodecLabel } from '../ui/data-display';
 
@@ -250,7 +250,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                   </div>
                 </div>
                 {file.compatibility === 'supported' && (
-                  <GlassButton
+                  <Button
                     variant="primary"
                     size="sm"
                     onClick={(e) => {
@@ -260,7 +260,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                     className="w-full mt-2"
                   >
                     Create Stream
-                  </GlassButton>
+                  </Button>
                 )}
               </div>
             </div>
@@ -319,7 +319,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
           <div className="flex items-center gap-4">
             <div className="relative flex-1 max-w-md">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <GlassInput
+              <Input
                 placeholder="Search media files..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -329,7 +329,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
 
             <div className="flex items-center gap-2">
               {viewModes.map(mode => (
-                <GlassButton
+                <Button
                   key={mode.type}
                   variant={viewMode === mode.type ? 'primary' : 'secondary'}
                   onClick={() => setViewMode(mode.type)}
@@ -337,32 +337,32 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                   aria-label={`Switch to ${mode.label} view`}
                 >
                   {mode.icon}
-                </GlassButton>
+                </Button>
               ))}
             </div>
 
-            <GlassButton
+            <Button
               variant="secondary"
               onClick={() => setShowFilters(!showFilters)}
               className="p-2"
               aria-label="Toggle filters"
             >
               <FunnelIcon className="w-5 h-5" />
-            </GlassButton>
+            </Button>
 
-            <GlassButton
+            <Button
               variant="secondary"
               onClick={() => window.location.reload()}
               className="p-2"
               aria-label="Refresh"
             >
               <ArrowPathIcon className="w-5 h-5" />
-            </GlassButton>
+            </Button>
           </div>
         </div>
 
         {showFilters && (
-          <GlassCard className="mb-6">
+          <Card className="mb-6">
             <div className="p-4">
               <h3 className="heading-5 mb-4">Filters</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -422,15 +422,15 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                 </div>
               </div>
               <div className="mt-4 flex justify-end gap-2">
-                <GlassButton
+                <Button
                   variant="secondary"
                   onClick={() => setFilters({})}
                 >
                   Clear Filters
-                </GlassButton>
+                </Button>
               </div>
             </div>
-          </GlassCard>
+          </Card>
         )}
 
         <div className="media-grid-desktop">
@@ -479,7 +479,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                   </div>
                 </div>
                 {file.compatibility === 'supported' && (
-                  <GlassButton
+                  <Button
                     variant="primary"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -488,7 +488,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                     className="w-full mt-4"
                   >
                     Create Stream
-                  </GlassButton>
+                  </Button>
                 )}
               </div>
             </div>
@@ -498,7 +498,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
 
       <aside className="media-sidebar-desktop">
         {selectedFile && (
-          <GlassCard>
+          <Card>
             <div className="p-6">
               <h3 className="heading-4 mb-4">File Details</h3>
               {(() => {
@@ -553,22 +553,22 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
                     </div>
 
                     {file.compatibility === 'supported' && (
-                      <GlassButton
+                      <Button
                         variant="primary"
                         onClick={() => onCreateStream?.(file.id)}
                         className="w-full"
                       >
                         Create Stream
-                      </GlassButton>
+                      </Button>
                     )}
                   </div>
                 );
               })()}
             </div>
-          </GlassCard>
+          </Card>
         )}
 
-        <GlassCard className="mt-4">
+        <Card className="mt-4">
           <div className="p-6">
             <h3 className="heading-4 mb-4">Statistics</h3>
             <div className="space-y-3">
@@ -596,7 +596,7 @@ export const ResponsiveMediaLibrary: React.FC<ResponsiveMediaLibraryProps> = ({
               </div>
             </div>
           </div>
-        </GlassCard>
+        </Card>
       </aside>
     </div>
   );

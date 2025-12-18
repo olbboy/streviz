@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { GlassCard } from "./glass-card"
+import { Card } from "./card"
 
 // Metric card for displaying key performance indicators
 export interface MetricCardProps {
@@ -120,14 +120,10 @@ export const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
     }, [value, prevValue, loading])
 
     return (
-      <GlassCard
+      <Card
         ref={ref}
-        variant="surface-02"
-        blur="lg"
-        depth="raised"
-        animated={true}
         className={cn(
-          "group cursor-pointer transition-all duration-300 hover:scale-[1.02]",
+          "surface group cursor-pointer transition-all duration-300 hover:scale-[1.02]",
           sizeStyles.container,
           isHovered && config.glow,
           className
@@ -265,7 +261,7 @@ export const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
             />
           )}
         </div>
-      </GlassCard>
+      </Card>
     )
   }
 )
@@ -311,7 +307,7 @@ export const GlassTable = React.forwardRef<HTMLTableElement, GlassTableProps>(
     }
 
     return (
-      <GlassCard variant="surface-02" blur="md" className="overflow-hidden">
+      <Card className="surface overflow-hidden">
         <div className="overflow-x-auto">
           <table
             ref={ref}
@@ -391,7 +387,7 @@ export const GlassTable = React.forwardRef<HTMLTableElement, GlassTableProps>(
             </tbody>
           </table>
         </div>
-      </GlassCard>
+      </Card>
     )
   }
 )

@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { ArrowRight, CheckCircle, AlertCircle, Clock, Settings, Film, Radio, Wifi } from "lucide-react";
-import { GlassCard } from "../ui/glass-card";
-import { GlassButton } from "../ui/glass-button";
+import { Card } from "../ui/card";
+import { Button } from "../ui/button";
 import type { MediaFile, Profile } from "../../types";
 
 interface StreamCreationWorkflowProps {
@@ -150,7 +150,7 @@ export function StreamCreationWorkflow({
             <h3>Selected Files</h3>
             <div className="selected-files-list">
               {selectedFiles.map((file, index) => (
-                <GlassCard key={file.id} className="selected-file-card" variant="subtle">
+                <Card key={file.id} className="selected-file-card surface">
                   <div className="file-info">
                     <span className="file-number">{index + 1}</span>
                     <div className="file-details">
@@ -171,7 +171,7 @@ export function StreamCreationWorkflow({
                       {file.compatibility === "copy" ? "Direct" : file.compatibility === "transcode" ? "Transcode" : "Unsupported"}
                     </div>
                   </div>
-                </GlassCard>
+                </Card>
               ))}
             </div>
             <p className="step-description">
@@ -189,12 +189,11 @@ export function StreamCreationWorkflow({
                 const isSelected = selectedProfile?.id === profile.id;
 
                 return (
-                  <GlassCard
+                  <Card
                     key={profile.id}
                     className={`profile-card ${isSelected ? "selected" : ""} ${
                       !compatibility.isFullyCompatible ? "has-incompatible" : ""
-                    }`}
-                    variant={isSelected ? "primary" : "interactive"}
+                    } ${isSelected ? "border-primary" : ""}`}
                     onClick={() => setSelectedProfile(profile)}
                   >
                     <div className="profile-header">
@@ -243,7 +242,7 @@ export function StreamCreationWorkflow({
                         </div>
                       )}
                     </div>
-                  </GlassCard>
+                  </Card>
                 );
               })}
             </div>
@@ -262,7 +261,7 @@ export function StreamCreationWorkflow({
           <div className="step-content">
             <h3>Stream Configuration</h3>
             <div className="configuration-form">
-              <GlassCard className="config-section" variant="subtle">
+              <Card className="config-section surface">
                 <div className="form-group">
                   <label htmlFor="stream-name">Stream Name</label>
                   <input
@@ -287,10 +286,10 @@ export function StreamCreationWorkflow({
                     </p>
                   </div>
                 )}
-              </GlassCard>
+              </Card>
 
               {selectedProfile && (
-                <GlassCard className="config-summary" variant="subtle">
+                <Card className="config-summary surface">
                   <h4>Stream Summary</h4>
                   <div className="summary-details">
                     <div className="summary-row">
@@ -313,7 +312,7 @@ export function StreamCreationWorkflow({
                       <span className="value">{selectedFiles.length} file{selectedFiles.length !== 1 ? "s" : ""}</span>
                     </div>
                   </div>
-                </GlassCard>
+                </Card>
               )}
             </div>
           </div>
@@ -321,47 +320,46 @@ export function StreamCreationWorkflow({
       </div>
 
       {error && (
-        <GlassCard className="error-message" variant="error">
+        <Card className="error-message surface-error">
           <AlertCircle size={20} />
           <span>{error}</span>
-        </GlassCard>
+        </Card>
       )}
 
       <div className="workflow-actions">
-        <GlassButton
+        <Button
           variant="secondary"
           onClick={onClose}
           disabled={isCreating}
         >
           Cancel
-        </GlassButton>
+        </Button>
 
         <div className="action-buttons">
           {currentStep > 1 && (
-            <GlassButton
+            <Button
               variant="secondary"
               onClick={handlePrevious}
               disabled={isCreating}
             >
               Previous
-            </GlassButton>
+            </Button>
           )}
 
           {currentStep < totalSteps ? (
-            <GlassButton
-              variant="primary"
+            <Button
+              variant="default"
               onClick={handleNext}
               disabled={!canProceed}
             >
               Next
               <ArrowRight size={16} />
-            </GlassButton>
+            </Button>
           ) : (
-            <GlassButton
-              variant="primary"
+            <Button
+              variant="default"
               onClick={handleCreate}
               disabled={!canProceed || isCreating}
-              loading={isCreating}
             >
               {isCreating ? (
                 <>
@@ -374,7 +372,7 @@ export function StreamCreationWorkflow({
                   Create Stream{isBatch ? "s" : ""}
                 </>
               )}
-            </GlassButton>
+            </Button>
           )}
         </div>
       </div>

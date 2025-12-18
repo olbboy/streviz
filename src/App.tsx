@@ -1,6 +1,7 @@
 // Streviz Main Application
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { LibraryPage } from "./pages/library";
 import { ControlCenterPage } from "./pages/control-center";
 import { SettingsPage } from "./pages/settings";
@@ -12,10 +13,8 @@ import { ResponsiveLayout } from "./components/navigation/responsive-navigation"
 import { useAnimationPerformance } from "./hooks/use-performance-optimization";
 import "./styles.css";
 
-type Page = "library" | "control-center" | "settings" | "merge";
-
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>("library");
+  const navigate = useNavigate();
   const [showShortcutsHelp, setShowShortcutsHelp] = useState(false);
   // Performance and device optimizations
   const { shouldUseReducedMotion } = useAnimationPerformance();
@@ -41,14 +40,14 @@ function App() {
   // Keyboard shortcut handlers
   const shortcutHandlers = useMemo(
     () => ({
-      goto_library: () => setCurrentPage("library"),
-      goto_control_center: () => setCurrentPage("control-center"),
-      goto_settings: () => setCurrentPage("settings"),
-      open_settings: () => setCurrentPage("settings"),
+      goto_library: () => navigate('/library'),
+      goto_control_center: () => navigate('/control-center'),
+      goto_settings: () => navigate('/settings'),
+      open_settings: () => navigate('/settings'),
       export_diagnostics: exportDiagnostics,
       show_shortcuts: () => setShowShortcutsHelp(true),
     }),
-    [exportDiagnostics]
+    [exportDiagnostics, navigate]
   );
 
   // Register global keyboard shortcuts
@@ -75,22 +74,16 @@ function App() {
 
   return (
     <ResponsiveLayout>
-      {/* Main pages */}
+      {/* Main pages using React Router */}
       <div className={`responsive-padding ${shouldUseReducedMotion ? 'transition-none' : ''}`}>
-        {currentPage === "library" && (
-          <LibraryPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-        {currentPage === "control-center" && (
-          <ControlCenterPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-        {currentPage === "settings" && (
-          <SettingsPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-        {currentPage === "merge" && (
-          <MergePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-          </div>
+        <Routes>
+          <Route path="/" element={<Navigate to="/library" replace />} />
+          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/control-center" element={<ControlCenterPage onNavigate={navigate} />} />
+          <Route path="/settings" element={<SettingsPage onNavigate={navigate} />} />
+          <Route path="/merge" element={<MergePage onNavigate={navigate} />} />
+        </Routes>
+      </div>
 
       {/* Shortcuts help modal */}
       {showShortcutsHelp && (

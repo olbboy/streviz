@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Search, Filter, X, Film, Music, Image, File } from "lucide-react";
-import { GlassButton } from "../ui/glass-button";
+import { Button } from "../ui/button";
 
 interface MediaSearchBarProps {
   searchQuery: string;
@@ -61,30 +61,30 @@ export function MediaSearchBar({
           className="search-input"
         />
         {searchQuery && (
-          <GlassButton
+          <Button
             variant="secondary"
             size="sm"
             onClick={() => onSearchChange("")}
             className="clear-search-btn"
           >
             <X size={16} />
-          </GlassButton>
+          </Button>
         )}
       </div>
 
       <div className="search-controls">
         <div className="filter-group">
           {filterOptions.map(({ value, label, icon: Icon }) => (
-            <GlassButton
+            <Button
               key={value}
-              variant={filterType === value ? "primary" : "secondary"}
+              variant={filterType === value ? "default" : "secondary"}
               size="sm"
               onClick={() => onFilterChange(value)}
               className={`filter-btn ${filterType === value ? "active" : ""}`}
             >
               <Icon size={16} />
               <span className="filter-label">{label}</span>
-            </GlassButton>
+            </Button>
           ))}
         </div>
 
@@ -104,7 +104,7 @@ export function MediaSearchBar({
         </div>
 
         {activeFilters.length > 0 && (
-          <GlassButton
+          <Button
             variant="secondary"
             size="sm"
             onClick={clearFilters}
@@ -112,10 +112,10 @@ export function MediaSearchBar({
           >
             <X size={16} />
             Clear Filters
-          </GlassButton>
+          </Button>
         )}
 
-        <GlassButton
+        <Button
           variant="secondary"
           size="sm"
           onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
@@ -123,7 +123,7 @@ export function MediaSearchBar({
         >
           <Filter size={16} />
           Advanced
-        </GlassButton>
+        </Button>
       </div>
 
       {showAdvancedFilters && (
@@ -195,12 +195,12 @@ export function MediaSearchBar({
           </div>
 
           <div className="filter-actions">
-            <GlassButton variant="secondary" size="sm">
+            <Button variant="secondary" size="sm">
               Reset to Default
-            </GlassButton>
-            <GlassButton variant="primary" size="sm">
+            </Button>
+            <Button variant="default" size="sm">
               Apply Filters
-            </GlassButton>
+            </Button>
           </div>
         </div>
       )}

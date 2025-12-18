@@ -1,11 +1,12 @@
 // Library page - browse and manage media files with glassmorphism design
 
 import { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import "./library.css";
 import { Plus, FolderOpen, X, Film, Music, Image, File } from "lucide-react";
-import { GlassButton } from "../components/ui/glass-button";
-import { GlassCard } from "../components/ui/glass-card";
-import { GlassModal } from "../components/ui/glass-modal";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { Dialog, DialogContent } from "../components/ui/dialog";
 import { MediaFileGrid } from "../components/media/media-file-grid";
 import { EnhancedFileTree } from "../components/media/enhanced-file-tree";
 import { StreamCreationWorkflow } from "../components/media/stream-creation-workflow";
@@ -14,11 +15,8 @@ import { ViewToggle } from "../components/media/view-toggle";
 import { useScanner, useStreams, useProfiles } from "../hooks/use-api";
 import type { ViewMode } from "../types";
 
-interface LibraryPageProps {
-  onNavigate: (page: string) => void;
-}
-
-export function LibraryPage({ onNavigate }: LibraryPageProps) {
+export function LibraryPage() {
+  const navigate = useNavigate();
   const { files, loading: scanLoading, scan, loadAll } = useScanner();
   const { create: createStream, createBatch } = useStreams();
   const { profiles, loadAll: loadProfiles } = useProfiles();
@@ -115,7 +113,7 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
 
       setShowCreateModal(false);
       setSelectedFiles(new Set());
-      onNavigate("control-center");
+      navigate("/control-center");
     } catch (err) {
       console.error("Stream creation error:", err);
     }
@@ -196,18 +194,18 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
               </span>
             </div>
           </div>
-          <GlassButton
-            variant="primary"
-            onClick={() => onNavigate("control-center")}
+          <Button
+            variant="default"
+            onClick={() => navigate("/control-center")}
             className="control-center-btn"
           >
             Control Center →
-          </GlassButton>
+          </Button>
         </div>
       </div>
 
       {/* Scan Section */}
-      <GlassCard className="scan-section" variant="interactive">
+      <Card className="scan-section surface">
         <div className="scan-content">
           <div className="scan-input-group">
             <div className="scan-input-wrapper">
@@ -219,24 +217,23 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
                 placeholder="/path/to/media/folder"
                 className="scan-input"
               />
-              <GlassButton
-                variant="primary"
+              <Button
+                variant="default"
                 onClick={handleScan}
                 disabled={scanLoading || !scanPath}
-                loading={scanLoading}
               >
                 {scanLoading ? "Scanning..." : "Scan Folder"}
-              </GlassButton>
+              </Button>
             </div>
             <small className="scan-hint">
               Scan up to 2 levels deep for media files (MP4, AVI, MKV, MOV, MP3, WAV, etc.)
             </small>
           </div>
         </div>
-      </GlassCard>
+      </Card>
 
       {/* Search and Filter Bar */}
-      <GlassCard className="search-filter-section" variant="interactive">
+      <Card className="search-filter-section surface">
         <MediaSearchBar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -245,7 +242,7 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
           sortBy={sortBy}
           onSortChange={setSortBy}
         />
-      </GlassCard>
+      </Card>
 
       {/* View Controls */}
       <div className="view-controls">
@@ -253,22 +250,22 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
           {selectedFiles.size > 0 && (
             <div className="selection-info">
               <span className="selection-count">{selectedFiles.size} selected</span>
-              <GlassButton
-                variant="primary"
+              <Button
+                variant="default"
                 onClick={() => setShowCreateModal(true)}
                 className="create-stream-btn"
               >
                 <Plus size={16} />
                 Create Stream{selectedFiles.size > 1 ? "s" : ""}
-              </GlassButton>
-              <GlassButton
+              </Button>
+              <Button
                 variant="secondary"
                 onClick={() => setSelectedFiles(new Set())}
                 className="clear-selection-btn"
               >
                 <X size={16} />
                 Clear
-              </GlassButton>
+              </Button>
             </div>
           )}
         </div>
@@ -277,14 +274,14 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
 
       {/* Main Content */}
       <div
-        className={`library-content ${isDragging ? 'dragging' : ''}`}
+        className={`library-content scrollbar-enhanced ${isDragging ? 'dragging' : ''}`}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
         {filteredAndSortedFiles.length === 0 ? (
-          <GlassCard className="empty-state" variant="interactive">
+          <Card className="empty-state surface hover-directional">
             <div className="empty-content">
               <div className="empty-icon">
                 <FolderOpen size={48} />
@@ -302,7 +299,7 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
                 </p>
               )}
             </div>
-          </GlassCard>
+          </Card>
         ) : viewMode === "tree" ? (
           <EnhancedFileTree
             files={filteredAndSortedFiles}
@@ -333,11 +330,8 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
 
       {/* Stream Creation Modal */}
       {showCreateModal && (
-        <GlassModal
-          isOpen={showCreateModal}
-          onClose={() => setShowCreateModal(false)}
-          size="lg"
-        >
+        <Dialog open={showCreateModal} onOpenChange={() => setShowCreateModal(false)}>
+        <DialogContent className="max-w-2xl">
           <StreamCreationWorkflow
             selectedFiles={Array.from(selectedFiles).map(id =>
               files.find(f => f.id === id)!
@@ -346,7 +340,8 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
             onClose={() => setShowCreateModal(false)}
             onCreate={handleCreateStream}
           />
-        </GlassModal>
+        </DialogContent>
+      </Dialog>
       )}
     </div>
   );

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Play, Pause, Film, Music, Image, File as FileIcon, Check, MoreVertical, Download, Trash2 } from "lucide-react";
-import { GlassCard } from "../ui/glass-card";
-import { GlassButton } from "../ui/glass-button";
+import { InteractiveCard } from "../ui/card";
+import { Button } from "../ui/button";
 import type { MediaFile } from "../../types";
 
 interface MediaFileCardProps {
@@ -94,9 +94,8 @@ export function MediaFileCard({
 
   if (viewMode === "list") {
     return (
-      <GlassCard
-        className={`media-file-card list-view ${isSelected ? 'selected' : ''}`}
-        variant="interactive"
+      <InteractiveCard
+        className={`media-file-card list-view ${isSelected ? 'selected' : ''} surface`}
         onMouseDown={handleMouseDown}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -112,9 +111,9 @@ export function MediaFileCard({
                   <img src={file.thumbnail_url} alt={file.filename} />
                   {isHovered && (
                     <div className="play-overlay">
-                      <GlassButton variant="secondary" size="sm" className="play-btn">
+                      <Button variant="secondary" size="sm" className="play-btn">
                         {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-                      </GlassButton>
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -163,7 +162,7 @@ export function MediaFileCard({
             </div>
 
             <div className="file-actions">
-              <GlassButton
+              <Button
                 variant="secondary"
                 size="sm"
                 onClick={(e) => {
@@ -172,32 +171,31 @@ export function MediaFileCard({
                 }}
               >
                 <MoreVertical size={16} />
-              </GlassButton>
+              </Button>
 
               {showMenu && (
                 <div className="action-menu">
-                  <GlassButton variant="secondary" size="sm">
+                  <Button variant="secondary" size="sm">
                     <Download size={14} />
                     Download
-                  </GlassButton>
-                  <GlassButton variant="secondary" size="sm">
+                  </Button>
+                  <Button variant="secondary" size="sm">
                     <Trash2 size={14} />
                     Delete
-                  </GlassButton>
+                  </Button>
                 </div>
               )}
             </div>
           </div>
         </div>
-      </GlassCard>
+      </InteractiveCard>
     );
   }
 
   // Grid view
   return (
-    <GlassCard
-      className={`media-file-card grid-view ${isSelected ? 'selected' : ''}`}
-      variant="interactive"
+    <InteractiveCard
+      className={`media-file-card grid-view ${isSelected ? 'selected' : ''} surface`}
       onMouseDown={handleMouseDown}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -209,7 +207,7 @@ export function MediaFileCard({
               <img src={file.thumbnail_url} alt={file.filename} />
               {isHovered && (
                 <div className="media-overlay">
-                  <GlassButton
+                  <Button
                     variant="secondary"
                     size="sm"
                     className="play-btn"
@@ -219,7 +217,7 @@ export function MediaFileCard({
                     }}
                   >
                     {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-                  </GlassButton>
+                  </Button>
                 </div>
               )}
             </div>
@@ -267,7 +265,7 @@ export function MediaFileCard({
             </span>
 
             <div className="card-actions">
-              <GlassButton
+              <Button
                 variant="secondary"
                 size="sm"
                 onClick={(e) => {
@@ -276,22 +274,22 @@ export function MediaFileCard({
                 }}
               >
                 <MoreVertical size={16} />
-              </GlassButton>
+              </Button>
 
               {showMenu && (
                 <div className="action-menu">
-                  <GlassButton variant="secondary" size="sm">
+                  <Button variant="secondary" size="sm">
                     <Download size={14} />
-                  </GlassButton>
-                  <GlassButton variant="secondary" size="sm">
+                  </Button>
+                  <Button variant="secondary" size="sm">
                     <Trash2 size={14} />
-                  </GlassButton>
+                  </Button>
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
-    </GlassCard>
+    </InteractiveCard>
   );
 }

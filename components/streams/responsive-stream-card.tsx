@@ -12,7 +12,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { StreamStatus } from '../ui/stream-status';
 import { TechnicalMetric } from '../ui/typography';
-import { GlassButton } from '../ui/glass-button';
+import { Button } from '../../src/components/ui/button';
 import { StreamUrl } from '../ui/url-copier';
 
 interface ResponsiveStreamCardProps {
@@ -88,23 +88,23 @@ export const ResponsiveStreamCard: React.FC<ResponsiveStreamCardProps> = ({
 
         <div className="stream-card-actions-mobile">
           {!isActive ? (
-            <GlassButton
+            <Button
               variant="primary"
               onClick={handleStart}
               className="stream-action-mobile primary"
             >
               <PlayIcon className="w-4 h-4 mr-2" />
               Start
-            </GlassButton>
+            </Button>
           ) : (
-            <GlassButton
+            <Button
               variant="danger"
               onClick={handleStop}
               className="stream-action-mobile danger"
             >
               <StopIcon className="w-4 h-4 mr-2" />
               Stop
-            </GlassButton>
+            </Button>
           )}
 
           <button
@@ -119,21 +119,21 @@ export const ResponsiveStreamCard: React.FC<ResponsiveStreamCardProps> = ({
         {showActions && (
           <div className="mt-2 flex gap-2">
             {onEdit && (
-              <GlassButton
+              <Button
                 variant="secondary"
                 onClick={handleEdit}
                 className="flex-1 text-sm py-2"
               >
                 Edit
-              </GlassButton>
+              </Button>
             )}
-            <GlassButton
+            <Button
               variant="danger"
               onClick={handleDelete}
               className="text-sm py-2"
             >
               <TrashIcon className="w-4 h-4" />
-            </GlassButton>
+            </Button>
           </div>
         )}
       </div>
@@ -194,15 +194,15 @@ export const ResponsiveStreamCard: React.FC<ResponsiveStreamCardProps> = ({
 
         <div className="flex gap-2">
           {!isActive ? (
-            <GlassButton variant="primary" onClick={handleStart} className="flex-1">
+            <Button variant="primary" onClick={handleStart} className="flex-1">
               <PlayIcon className="w-4 h-4 mr-2" />
               Start Stream
-            </GlassButton>
+            </Button>
           ) : (
-            <GlassButton variant="danger" onClick={handleStop} className="flex-1">
+            <Button variant="danger" onClick={handleStop} className="flex-1">
               <StopIcon className="w-4 h-4 mr-2" />
               Stop Stream
-            </GlassButton>
+            </Button>
           )}
 
           <div className="relative">
@@ -315,7 +315,7 @@ export const ResponsiveStreamCard: React.FC<ResponsiveStreamCardProps> = ({
 
         <div className="flex gap-3">
           {!isActive ? (
-            <GlassButton
+            <Button
               variant="primary"
               onClick={handleStart}
               size="lg"
@@ -323,9 +323,9 @@ export const ResponsiveStreamCard: React.FC<ResponsiveStreamCardProps> = ({
             >
               <PlayIcon className="w-5 h-5 mr-2" />
               Start Stream
-            </GlassButton>
+            </Button>
           ) : (
-            <GlassButton
+            <Button
               variant="danger"
               onClick={handleStop}
               size="lg"
@@ -333,22 +333,22 @@ export const ResponsiveStreamCard: React.FC<ResponsiveStreamCardProps> = ({
             >
               <StopIcon className="w-5 h-5 mr-2" />
               Stop Stream
-            </GlassButton>
+            </Button>
           )}
 
           {onEdit && (
-            <GlassButton variant="secondary" onClick={handleEdit}>
+            <Button variant="secondary" onClick={handleEdit}>
               <EllipsisVerticalIcon className="w-5 h-5" />
-            </GlassButton>
+            </Button>
           )}
 
-          <GlassButton
+          <Button
             variant="danger"
             onClick={handleDelete}
             className="px-4"
           >
             <TrashIcon className="w-5 h-5" />
-          </GlassButton>
+          </Button>
         </div>
       </div>
     </div>
@@ -415,12 +415,12 @@ export const ResponsiveStreamList: React.FC<ResponsiveStreamListProps> = ({
           <div className="flex items-center justify-between">
             <h2 className="heading-2">Active Streams</h2>
             <div className="flex gap-3">
-              <GlassButton variant="secondary">
+              <Button variant="secondary">
                 Select All
-              </GlassButton>
-              <GlassButton variant="primary">
+              </Button>
+              <Button variant="primary">
                 Start Selected
-              </GlassButton>
+              </Button>
             </div>
           </div>
         </div>
@@ -473,18 +473,18 @@ export const ResponsiveStreamList: React.FC<ResponsiveStreamListProps> = ({
           <div>
             <h3 className="heading-4 mb-4">Quick Actions</h3>
             <div className="space-y-2">
-              <GlassButton variant="primary" className="w-full">
+              <Button variant="primary" className="w-full">
                 <PlayIcon className="w-4 h-4 mr-2" />
                 Start All
-              </GlassButton>
-              <GlassButton variant="danger" className="w-full">
+              </Button>
+              <Button variant="danger" className="w-full">
                 <StopIcon className="w-4 h-4 mr-2" />
                 Stop All
-              </GlassButton>
-              <GlassButton variant="secondary" className="w-full">
+              </Button>
+              <Button variant="secondary" className="w-full">
                 <TrashIcon className="w-4 h-4 mr-2" />
                 Delete Stopped
-              </GlassButton>
+              </Button>
             </div>
           </div>
         </div>
@@ -508,10 +508,10 @@ export const ResponsiveStreamList: React.FC<ResponsiveStreamListProps> = ({
         <p className="text-muted-foreground mb-4">
           Create your first stream to get started with broadcasting
         </p>
-        <GlassButton variant="primary">
+        <Button variant="primary">
           <PlayIcon className="w-4 h-4 mr-2" />
           Create Stream
-        </GlassButton>
+        </Button>
       </div>
     );
   }

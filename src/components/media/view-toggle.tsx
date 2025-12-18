@@ -1,7 +1,7 @@
 // View toggle component for switching between grid, list, and tree views
 
 import { Grid, List, FolderTree } from "lucide-react";
-import { GlassButton } from "../ui/glass-button";
+import { Button } from "../ui/button";
 import type { ViewMode } from "../../types";
 
 interface ViewToggleProps {
@@ -20,9 +20,9 @@ export function ViewToggle({ viewMode, onViewChange }: ViewToggleProps) {
     <div className="view-toggle">
       <div className="toggle-group">
         {views.map(({ mode, icon: Icon, label }) => (
-          <GlassButton
+          <Button
             key={mode}
-            variant={viewMode === mode ? "primary" : "surface"}
+            variant={viewMode === mode ? "default" : "surface"}
             size="sm"
             onClick={() => onViewChange(mode)}
             className={`view-button ${viewMode === mode ? "active" : ""}`}
@@ -30,7 +30,7 @@ export function ViewToggle({ viewMode, onViewChange }: ViewToggleProps) {
           >
             <Icon size={18} />
             <span className="view-label">{label}</span>
-          </GlassButton>
+          </Button>
         ))}
       </div>
     </div>

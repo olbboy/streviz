@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border bg-card text-card-foreground shadow-glass",
+      "rounded-lg border bg-card text-card-foreground shadow-sm surface",
       className
     )}
     {...props}
@@ -65,4 +65,49 @@ const CardFooter = React.forwardRef<
 ))
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+// Interactive Card variant for clickable elements
+const InteractiveCard = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "rounded-lg border bg-card text-card-foreground shadow-sm cursor-pointer card-interactive",
+      className
+    )}
+    {...props}
+  />
+))
+InteractiveCard.displayName = "InteractiveCard"
+
+// Stream Card component for streaming specific use cases
+const StreamCard = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    status?: 'idle' | 'active' | 'error' | 'warning'
+  }
+>(({ className, status = 'idle', ...props }, ref) => {
+  const statusColors = {
+    idle: 'border-border-light',
+    active: 'border-success bg-surface-secondary',
+    error: 'border-error bg-surface-tertiary',
+    warning: 'border-warning bg-surface-secondary'
+  }
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-150 border-l-4",
+        statusColors[status],
+        status !== 'idle' && 'hover:shadow-md',
+        className
+      )}
+      {...props}
+    />
+  )
+})
+StreamCard.displayName = "StreamCard"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, InteractiveCard, StreamCard }

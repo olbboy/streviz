@@ -104,7 +104,7 @@ export function DesignShowcase() {
               <Button variant="secondary">Secondary</Button>
               <Button variant="outline">Outline</Button>
               <Button variant="ghost">Ghost</Button>
-              <Button variant="glass">Glass</Button>
+              <Button variant="surface">Surface</Button>
               <Button variant="destructive">Destructive</Button>
               <Button size="sm">Small</Button>
               <Button size="lg">Large</Button>

@@ -115,7 +115,7 @@ export const ResponsiveNavigation: React.FC<ResponsiveNavigationProps> = ({
           <h2 className="text-xl font-bold font-display text-foreground">Streviz</h2>
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-2 rounded-lg hover:bg-surface-02 transition-colors touch-target"
+            className="p-2 rounded-lg hover:bg-glass-surface-02 transition-colors touch-target"
             aria-label="Toggle sidebar"
           >
             <Bars3Icon className="w-5 h-5 text-foreground" />
@@ -196,7 +196,7 @@ export const ResponsiveNavigation: React.FC<ResponsiveNavigationProps> = ({
       onClick={() => handleMobileMenuToggle(false)}
     >
       <div
-        className={`absolute left-0 top-0 bottom-0 w-72 bg-surface-03 border-r border-glass-border transform transition-transform duration-300 ${
+        className={`absolute left-0 top-0 bottom-0 w-72 bg-glass-surface-03 border-r border-white/10 dark:border-white/10 transform transition-transform duration-300 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -206,7 +206,7 @@ export const ResponsiveNavigation: React.FC<ResponsiveNavigationProps> = ({
             <h2 className="text-xl font-bold font-display text-foreground">Menu</h2>
             <button
               onClick={() => handleMobileMenuToggle(false)}
-              className="p-2 rounded-lg hover:bg-surface-02 transition-colors touch-target"
+              className="p-2 rounded-lg hover:bg-glass-surface-02 transition-colors touch-target"
               aria-label="Close menu"
             >
               <XMarkIcon className="w-5 h-5 text-foreground" />
